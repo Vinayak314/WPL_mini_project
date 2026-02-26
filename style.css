@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:wght@400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --rose: #8F0000;
+    --blush: #F5D5D5;
+    --cream: #FFF5EE;
+    --antique-gold: #C9956B;
+    --burgundy: #5C1A1A;
+    --heading: 'Playfair Display', Georgia, serif;
+    --body: 'Lora', 'Times New Roman', serif;
+}
+
+body {
+    font-family: var(--body);
+    background-color: var(--cream);
+    color: var(--burgundy);
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* navbar */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    padding: 18px 40px;
+    background: transparent;
+}
+
+.navbar a {
+    font-family: var(--heading);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--burgundy);
+    padding: 6px 14px;
+    border-radius: 4px;
+    transition: all 0.3s;
+    letter-spacing: 0.5px;
+}
+
+.navbar a:hover,
+.navbar a.active {
+    color: var(--rose);
+    background: transparent;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.navbar .logo-wrapper {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.navbar .logo-wrapper .logo {
+    width: 130%;
+    height: 130%;
+    margin: -15%;
+    object-fit: cover;
+    border-radius: 0;
+    border: none;
+    display: block;
+}
+
+/* index.html  */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 80px;
+    background: var(--cream);
+    min-height: 400px;
+}
+
+.hero-text h1 {
+    font-family: var(--heading);
+    font-size: 52px;
+    color: var(--burgundy);
+    margin-bottom: 12px;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    margin-top: 28px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border: 2px solid var(--rose);
+    border-radius: 4px;
+    font-family: var(--heading);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: transparent;
+    color: var(--rose);
+    letter-spacing: 1px;
+}
+
+.btn:hover {
+    background: var(--rose);
+    color: #fff;
+}
+
+.btn-primary {
+    background: var(--antique-gold);
+    border-color: var(--antique-gold);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #b5844f;
+    border-color: #b5844f;
+}
+
+.hero-img {
+    width: 280px;
+    height: 280px;
+    background: var(--blush);
+    border-radius: 12px;
+    border: 2px solid var(--rose);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: var(--rose);
+    font-style: italic;
+    transform: rotate(-3deg);
+}
+
+/* footer */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background: var(--blush);
+    border-top: 2px solid var(--rose);
+    font-size: 13px;
+    color: var(--burgundy);
+    font-style: italic;
+}
