@@ -41,8 +41,13 @@ a {
     align-items: center;
     justify-content: center;
     gap: 36px;
-    padding: 18px 40px;
-    background: transparent;
+    padding: 10px 40px;
+    background: rgba(255, 245, 238, 0.85); /* translucent var(--cream) */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .navbar a {
@@ -65,8 +70,8 @@ a {
 }
 
 .navbar .logo-wrapper {
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
@@ -86,23 +91,40 @@ a {
 .hero {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 60px 80px;
-    background: var(--cream);
-    min-height: 400px;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 80px;
+    background: linear-gradient(rgba(20, 5, 5, 0.65), rgba(92, 26, 26, 0.8)), url('assets/hero.jpeg');
+    background-size: cover;
+    background-position: center;
+    min-height: 500px;
+}
+
+.hero-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .hero-text h1 {
     font-family: var(--heading);
-    font-size: 52px;
-    color: var(--burgundy);
-    margin-bottom: 12px;
+    font-size: 64px;
+    color: var(--cream);
+    margin-bottom: 16px;
     font-style: italic;
     font-weight: 400;
 }
 
+.hero-text p {
+    font-size: 20px;
+    max-width: 650px;
+    color: var(--blush);
+    margin-bottom: 32px;
+}
+
 .hero-buttons {
     display: flex;
+    justify-content: center;
     gap: 16px;
     margin-top: 28px;
 }
@@ -138,19 +160,79 @@ a {
     border-color: #b5844f;
 }
 
-.hero-img {
-    width: 280px;
-    height: 280px;
-    background: var(--blush);
-    border-radius: 12px;
-    border: 2px solid var(--rose);
+.hero-btn-outline {
+    border-color: var(--cream);
+    color: var(--cream);
+}
+
+.hero-btn-outline:hover {
+    background: var(--cream);
+    color: var(--burgundy);
+}
+
+/* ===== About Section ===== */
+.about-section {
+    padding: 80px 40px;
+    background: var(--cream);
     display: flex;
-    align-items: center;
     justify-content: center;
+}
+
+.about-content {
+    max-width: 900px;
+    width: 100%;
+    text-align: center;
+}
+
+.about-content h2 {
+    font-family: var(--heading);
+    color: var(--burgundy);
+    font-size: 36px;
+    font-style: italic;
+    font-weight: 400;
+    margin-bottom: 32px;
+}
+
+.about-text {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--burgundy);
+    margin-bottom: 48px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.about-text p {
+    margin: 0;
+}
+
+.about-stats {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-item h3 {
+    font-family: var(--heading);
+    font-size: 42px;
+    color: var(--antique-gold);
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.stat-item p {
     font-size: 14px;
     color: var(--rose);
-    font-style: italic;
-    transform: rotate(-3deg);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
 }
 
 /* footer */
