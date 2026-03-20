@@ -132,16 +132,16 @@ a {
 .btn {
     display: inline-block;
     padding: 12px 30px;
-    border: 2px solid var(--rose);
-    border-radius: 4px;
+    border: 1px solid var(--rose);
+    border-radius: 30px; /* pill shape for a more modern, minimal look, or just 6px? Let's try 30px */
     font-family: var(--heading);
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500; /* slightly thinner text to match thin border */
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     background: transparent;
     color: var(--rose);
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
 }
 
 .btn:hover {
@@ -168,6 +168,29 @@ a {
 .hero-btn-outline:hover {
     background: var(--cream);
     color: var(--burgundy);
+}
+
+/* ===== Social & Buttons ===== */
+.btn-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.social-section {
+    padding: 0 40px 80px;
+    text-align: center;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
 /* ===== About Section ===== */
