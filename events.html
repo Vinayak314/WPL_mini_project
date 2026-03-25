@@ -24,6 +24,53 @@
     <main>
         <h2 class="page-title">Events</h2>
 
+        <section class="events-carousel-section">
+            <h3 class="upcoming-title">Upcoming Events</h3>
+            <div class="carousel-wrapper">
+                <button class="carousel-btn prev" id="carousel-prev" aria-label="Previous">‹</button>
+                <div class="carousel-track" id="event-carousel">
+                    <div class="event-card carousel-card">
+                        <div class="card-body">
+                            <div class="carousel-maintext">
+                                <h3>Farewell</h3>
+                                <p>Venue: KJSSE</p>
+                                <p>Date: 17 April, 2026<br>AA heartfelt celebration where the
+                                    team bids goodbye to its graduating members through soulful and expressive
+                                    performances. It
+                                    reflects gratitude, memories, and the strong bond shared within the team.</p>
+                            </div>
+                            <div class="carousel-side">
+                                <p>Registered: 120 people</p>
+                                <button class="register-btn">Register Now</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card carousel-card">
+                        <div class="card-body">
+                            <div class="carousel-maintext">
+                                <h3>Freshers'</h3>
+                                <p>Venue: KJSSE</p>
+                                <p>Date: 20 August, 2026<br>A lively welcome event where the Team Palinoia introduces
+                                    the freshers
+                                    to the elegance and richness of Indian classical dance. Through captivating
+                                    performances, the
+                                    team celebrates tradition, creativity, and cultural expression.</p>
+                            </div>
+                            <div class="carousel-side">
+                                <p>Registered: 95 people</p>
+                                <button class="register-btn">Register Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn next" id="carousel-next" aria-label="Next">›</button>
+            </div>
+        </section>
+
+        <div style="max-width: 1000px; margin: 0 auto; padding: 0 60px;">
+            <h3 class="upcoming-title" style="margin-bottom: 0;">Past Events</h3>
+        </div>
+
         <div class="events-grid">
             <div class="event-card naari-card">
                 <div class="card-img slideshow">
@@ -33,7 +80,9 @@
                 <div class="card-body">
                     <h3>Naari</h3>
                     <p>Venue: KJSSE</p>
-                    <p>Date: 10 March, 2025<br>A special event dedicated to celebrating the strength and grace of women through the lens of classical dance.</p>
+                    <p>Date: 10 March, 2025<br>A special event dedicated to celebrating the strength and grace of women
+                        through the lens of classical dance.</p>
+                    <p>Registered: 150 people</p>
                 </div>
             </div>
             <div class="event-card">
@@ -45,7 +94,9 @@
                     <h3>Farewell</h3>
                     <p>Venue: KJSSE</p>
                     <p>Date: 17 April, 2025<br>A heartfelt celebration where the
-                        team bids goodbye to its graduating members through soulful and expressive performances. It reflects gratitude, memories, and the strong bond shared within the team.</p>
+                        team bids goodbye to its graduating members through soulful and expressive performances. It
+                        reflects gratitude, memories, and the strong bond shared within the team.</p>
+                    <p>Registered: 200 people</p>
                 </div>
             </div>
             <div class="event-card">
@@ -56,7 +107,10 @@
                 <div class="card-body">
                     <h3>Freshers' Eve</h3>
                     <p>Venue: KJSSE</p>
-                    <p>Date: 22 August, 2025<br>A lively welcome event where the Team Palinoia introduces the freshers to the elegance and richness of Indian classical dance. Through captivating performances, the team celebrates tradition, creativity, and cultural expression.</p>
+                    <p>Date: 22 August, 2025<br>A lively welcome event where the Team Palinoia introduces the freshers
+                        to the elegance and richness of Indian classical dance. Through captivating performances, the
+                        team celebrates tradition, creativity, and cultural expression.</p>
+                    <p>Registered: 180 people</p>
                 </div>
             </div>
             <div class="event-card symphony-card">
@@ -67,14 +121,96 @@
                 <div class="card-body">
                     <h3>Symphony - Official Cultural Event of KJSSE</h3>
                     <p>Venue: KJSSE</p>
-                    <p>Date: 23 February, 2026<br>This is our flagship event where we showcase the best of Indian classical dance, bringing together talented performers and enthusiasts to celebrate the rich heritage of this art form.</p>
+                    <p>Date: 23 February, 2026<br>This is our flagship event where we showcase the best of Indian
+                        classical dance, bringing together talented performers and enthusiasts to celebrate the rich
+                        heritage of this art form.</p>
+                    <p>Registered: 300 people</p>
                 </div>
+            </div>
         </div>
     </main>
 
     <footer class="footer">
         &copy; 2026 Team Palinoia. All rights reserved.
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const carousel = document.getElementById('event-carousel');
+            const eventCards = document.querySelectorAll('.events-grid .event-card');
+            const today = new Date('2026-03-26'); // Current date (swap to new Date() to be dynamic)
+
+            eventCards.forEach(card => {
+                const dateText = card.querySelector('.card-body p:nth-child(3)').textContent.match(/Date:\s*([\d]{1,2} \w+, \d{4})/);
+                if (!dateText) return;
+
+                const eventDate = parseDate(dateText[1]);
+                if (eventDate <= today) return;
+
+                const clone = card.cloneNode(true);
+                clone.classList.add('carousel-card');
+
+                // Remove photo block from upcoming cards
+                const imageBlock = clone.querySelector('.card-img');
+                if (imageBlock) imageBlock.remove();
+
+                // Shift register and registration count to right side
+                const body = clone.querySelector('.card-body');
+                const regP = body.querySelector('p:last-of-type');
+                const btn = body.querySelector('.register-btn');
+                if (regP) {
+                    const sideBlock = document.createElement('div');
+                    sideBlock.className = 'carousel-side';
+                    sideBlock.appendChild(regP);
+                    if (btn) sideBlock.appendChild(btn);
+                    // keep first child text on left
+                    const mainText = document.createElement('div');
+                    mainText.className = 'carousel-maintext';
+                    while (body.firstChild && body.firstChild !== regP && body.firstChild !== btn) {
+                        mainText.appendChild(body.firstChild);
+                    }
+                    body.appendChild(mainText);
+                    body.appendChild(sideBlock);
+                }
+
+                const regInfo = card.querySelector('.card-body p:last-of-type').textContent;
+                const registered = parseInt(regInfo.replace(/[^0-9]/g, ''), 10);
+                if (registered >= 200) {
+                    const badge = document.createElement('span');
+                    badge.className = 'popular-badge';
+                    badge.textContent = 'Popular';
+                    const heading = clone.querySelector('.card-body h3');
+                    if (heading) heading.appendChild(badge);
+                }
+                carousel.appendChild(clone);
+            });
+
+            const prev = document.getElementById('carousel-prev');
+            const next = document.getElementById('carousel-next');
+
+            const scrollAmount = 560;
+            prev.addEventListener('click', () => {
+                carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            });
+
+            next.addEventListener('click', () => {
+                carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            });
+        });
+
+        function parseDate(dateStr) {
+            // dateStr like "10 March, 2025"
+            const parts = dateStr.split(' ');
+            const day = parseInt(parts[0]);
+            const month = parts[1].replace(',', '');
+            const year = parseInt(parts[2]);
+            const monthNames = {
+                'January': 0, 'February': 1, 'March': 2, 'April': 3, 'May': 4, 'June': 5,
+                'July': 6, 'August': 7, 'September': 8, 'October': 9, 'November': 10, 'December': 11
+            };
+            return new Date(year, monthNames[month], day);
+        }
+    </script>
 
 </body>
 
