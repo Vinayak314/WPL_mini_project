@@ -1,0 +1,151 @@
+/* ===== Contact / Login Form Page ===== */
+.form-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 60px);
+    padding: 40px 20px;
+}
+
+.form-container {
+    background: #fff;
+    border-radius: 12px;
+    padding: 44px 48px;
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(92, 26, 26, 0.06);
+}
+
+.form-container .form-logo {
+    width: 64px;
+    height: 64px;
+    background: #fff;
+    border-radius: 50%;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(92, 26, 26, 0.1);
+}
+
+.form-container .form-logo img {
+    width: 130%;
+    height: 130%;
+    margin: -15%;
+    object-fit: cover;
+    display: block;
+}
+
+.form-container h2 {
+    font-family: var(--heading);
+    color: var(--burgundy);
+    margin-bottom: 28px;
+    font-size: 24px;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--burgundy);
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: var(--body);
+    outline: none;
+    transition: border-color 0.3s;
+    color: var(--burgundy);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--rose);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background: var(--rose);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-family: var(--heading);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 8px;
+}
+
+.btn-submit:hover {
+    background: var(--burgundy);
+}
+
+/* ===== Auth Page Graphics ===== */
+.auth-page {
+    justify-content: center;
+    gap: 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.auth-graphic {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 440px;
+    position: relative;
+    padding: 20px;
+    background: radial-gradient(circle, rgba(201, 149, 107, 0.12) 0%, transparent 75%);
+    border-radius: 50%;
+}
+
+/* Dotted line framing removed as per user request */
+
+.auth-graphic img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+    opacity: 0.92;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.auth-graphic img:hover {
+    transform: scale(1.05);
+    opacity: 1;
+}
+
+@media (max-width: 900px) {
+    .auth-page {
+        gap: 0;
+    }
+
+    .auth-graphic {
+        display: none;
+    }
+}
