@@ -576,7 +576,6 @@ a {
 
 
 .register-btn {
-    align-self: flex-start;
     font-family: var(--heading);
     font-weight: 700;
     font-size: 14px;
@@ -650,7 +649,6 @@ a {
 }
 
 .register-btn {
-    align-self: flex-start;
     font-family: var(--heading);
     font-weight: 600;
     font-size: 13px;
@@ -830,7 +828,7 @@ a {
 
 .form-container {
     background: #fff;
-    border: 2px solid var(--rose);
+    /* border: 2px solid var(--rose); */
     border-radius: 12px;
     padding: 44px 48px;
     width: 100%;
@@ -844,7 +842,7 @@ a {
     height: 64px;
     background: #fff;
     border-radius: 50%;
-    border: 2px solid var(--rose);
+    /* border: 2px solid var(--rose); */
     margin: 0 auto 16px;
     display: flex;
     align-items: center;
@@ -888,7 +886,7 @@ a {
 .form-group textarea {
     width: 100%;
     padding: 10px 14px;
-    border: 2px solid var(--rose);
+    border: none;
     border-radius: 6px;
     font-size: 14px;
     font-family: var(--body);
