@@ -1,0 +1,66 @@
+-- Database: team_palinoia
+CREATE DATABASE IF NOT EXISTS team_palinoia;
+USE team_palinoia;
+
+
+-- 1. team_members (login credentials + name, includes admin)
+CREATE TABLE team_members (
+    member_id INT AUTO_INCREMENT PRIMARY KEY,
+    name      VARCHAR(100) NOT NULL,
+    email     VARCHAR(150) NOT NULL UNIQUE,
+    password  VARCHAR(100) NOT NULL,
+    role      ENUM('member', 'admin') DEFAULT 'member'
+);
+
+INSERT INTO team_members (name, email, password, role) VALUES
+('Admin',              'admin@palinoia.com',    'admin123',    'admin'),
+('Pratha Nagpal',      'pratha.n@somaiya.edu',   'pratha123',   'member'),
+('Swanandi Nikam',     'swanandi.nikam@somaiya.edu', 'swanandi123', 'member'),
+('Riya Gupta',         'riya.g@somaiya.edu',    'riyag123',    'member');
+
+-- 2. tasks (assigned to a team member)
+CREATE TABLE tasks (
+    task_id     INT AUTO_INCREMENT PRIMARY KEY,
+    member_id   INT NOT NULL,
+    title       VARCHAR(200) NOT NULL,
+    description TEXT,
+    status      ENUM('urgent', 'in_progress', 'completed') DEFAULT 'in_progress',
+    deadline    DATE,
+    event_name  VARCHAR(150),
+    FOREIGN KEY (member_id) REFERENCES team_members(member_id)
+);
+
+INSERT INTO tasks (member_id, title, description, status, deadline, event_name) VALUES
+(2, 'Choreography Rehearsal - Naari',
+    'Coordinate with the senior dancers to finalize the sequence for the second act of the Naari performance.',
+    'urgent', '2025-03-05', 'Naari'),
+(2, 'Costume Fitting Validation',
+    'Review the final costume measurements for the newly joined freshers. Confirm delivery date before dress rehearsal.',
+    'in_progress', '2025-03-12', 'Freshers Eve'),
+(3, 'Venue Setup Coordination',
+    'Contact the KJSSE administration for stage setup requirements including lighting and technical checks.',
+    'completed', '2026-02-20', 'Symphony'),
+(3, 'Tabla Composition for Naari',
+    'Prepare and finalize the tabla composition for the Naari opening act.',
+    'in_progress', '2025-03-08', 'Naari'),
+(4, 'Bharatanatyam Solo Rehearsal',
+    'Practice the solo Bharatanatyam piece for the Farewell event. Submit video to chiefs for review.',
+    'urgent', '2026-04-10', 'Farewell');
+
+
+-- 3. queries (contact us form submissions, viewable by admin)
+CREATE TABLE queries (
+    query_id     INT AUTO_INCREMENT PRIMARY KEY,
+    name         VARCHAR(100) NOT NULL,
+    email        VARCHAR(150) NOT NULL,
+    reason       TEXT NOT NULL,
+    submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO queries (name, email, reason) VALUES
+('Ananya Sharma', 'ananya.s@gmail.com',
+    'Hi! I am a FY student and have been learning Kathak for 3 years. How can I audition for the team?'),
+('Rohan Mehta', 'rohan.mehta@somaiya.edu',
+    'We are organizing a cultural fest and would love to invite Team Palinoia for a performance.'),
+('Sneha Patil', 'sneha.p@outlook.com',
+    'I attended the Symphony event and it was amazing! Are there any upcoming workshops for beginners?');

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queries - Team Palinoia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="events.html">Events</a>
+        <div class="logo-wrapper"><img src="assets/logo.jpeg" alt="Logo" class="logo"></div>
+        <a href="team.html">Team</a>
+        <a href="admin_queries.html" class="active">Queries</a>
+        <a href="index.html" class="nav-action" title="Logout">
+            <span class="nav-action-text">Logout</span>
+        </a>
+    </nav>
+
+    <main class="dashboard-main">
+        <h2 class="page-title" id="welcome-name">Welcome back, Admin!</h2>
+        <p class="dashboard-subtitle">Here are the submitted queries from the contact form.</p>
+
+        <div class="divider-container">
+            <img src="assets/divider.svg" alt="Decorative Divider" class="dashboard-divider">
+        </div>
+
+        <div class="tasks-section" id="queries-container">
+            <p style="text-align:center; color:#aaa;">Loading queries...</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        &copy; 2026 Team Palinoia. All rights reserved.
+    </footer>
+
+    <script>
+        function formatDateTime(dateStr) {
+            const d = new Date(dateStr);
+            return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })
+                + ' · '
+                + d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        fetch('php/fetch_queries.php')
+            .then(res => res.json())
+            .then(data => {
+                if (data.error === 'not_logged_in') {
+                    alert('Please login first');
+                    window.location.href = 'login.html';
+                    return;
+                }
+                if (data.error === 'not_authorized') {
+                    alert('Admin access required');
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                // Set welcome name
+                document.getElementById('welcome-name').textContent = 'Welcome back, ' + data.name + '!';
+
+                const container = document.getElementById('queries-container');
+                container.innerHTML = '';
+
+                if (data.queries.length === 0) {
+                    container.innerHTML = '<p style="text-align:center; color:#aaa;">No queries submitted yet.</p>';
+                    return;
+                }
+
+                data.queries.forEach(query => {
+                    const card = `
+                        <div class="task-card">
+                            <div class="task-header">
+                                <div class="task-title-group">
+                                    <svg class="task-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--antique-gold);">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                        <polyline points="22,6 12,13 2,6"/>
+                                    </svg>
+                                    <h3>${query.name}</h3>
+                                </div>
+                                <span class="task-status status-pending" style="text-transform: none;">${query.email}</span>
+                            </div>
+                            <div class="task-details">
+                                <p>${query.reason}</p>
+                            </div>
+                            <div class="task-meta">
+                                <span><strong>Submitted:</strong> ${formatDateTime(query.submitted_at)}</span>
+                            </div>
+                        </div>`;
+                    container.innerHTML += card;
+                });
+            })
+            .catch(err => {
+                document.getElementById('queries-container').innerHTML =
+                    '<p style="text-align:center; color:#f66;">Failed to load queries. Please try again.</p>';
+            });
+    </script>
+</body>
+
+</html>

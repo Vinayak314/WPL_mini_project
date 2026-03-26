@@ -154,8 +154,10 @@ a {
     letter-spacing: 0.5px;
 }
 
-.nav-action:hover {
-    background-color: var(--burgundy);
+.navbar .nav-action:hover {
+    background: var(--burgundy);
+    color: #fff;
+    text-decoration: none;
     transform: translateY(-2px);
     box-shadow: 0 6px 14px rgba(92, 26, 26, 0.3);
 }

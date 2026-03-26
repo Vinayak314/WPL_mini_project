@@ -28,18 +28,18 @@
         <div class="form-container">
                 <div class="form-logo"><img src="assets/logo.jpeg" alt="Logo"></div>
                 <h2>Contact Us</h2>
-                <form>
+                <form action="php/submit_query.php" method="POST">
                     <div class="form-group">
                         <label for="contact-name">Name:</label>
-                        <input type="text" id="contact-name" placeholder="Enter your name">
+                        <input type="text" id="contact-name" name="name" placeholder="Enter your name" required>
                     </div>
                     <div class="form-group">
                         <label for="contact-email">Email:</label>
-                        <input type="email" id="contact-email" placeholder="Enter your email">
+                        <input type="email" id="contact-email" name="email" placeholder="Enter your email" required>
                     </div>
                     <div class="form-group">
                         <label for="contact-reason">Reason:</label>
-                        <textarea id="contact-reason" placeholder="Tell us why you're reaching out"></textarea>
+                        <textarea id="contact-reason" name="reason" placeholder="Tell us why you're reaching out" required></textarea>
                     </div>
                     <button type="submit" class="btn-submit">SUBMIT</button>
                 </form>
