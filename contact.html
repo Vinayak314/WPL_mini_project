@@ -27,25 +27,30 @@
             <img src="assets/anarkali_idol.png" alt="Aesthetic Graphic">
         </div>
         <div class="form-container">
-                <div class="form-logo"><img src="assets/logo.jpeg" alt="Logo"></div>
-                <h2>Contact Us</h2>
-                <form action="php/submit_query.php" method="POST">
-                    <div class="form-group">
-                        <label for="contact-name">Name:</label>
-                        <input type="text" id="contact-name" name="name" placeholder="Enter your name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-email">Email:</label>
-                        <input type="email" id="contact-email" name="email" placeholder="Enter your email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-reason">Reason:</label>
-                        <textarea id="contact-reason" name="reason" placeholder="Tell us why you're reaching out" required></textarea>
-                    </div>
-                    <p style="text-align:center; color:#aaa; font-size:0.9rem; margin-top:0.5rem;">or contact us at <a href="mailto:palinoia.engg@somaiya.edu" style="color:var(--antique-gold, #c9a84c); text-decoration:none;">palinoia.engg@somaiya.edu</a></p>
-                    <button type="submit" class="btn-submit">SUBMIT</button>
-                </form>
-            </div>
+            <div class="form-logo"><img src="assets/logo.jpeg" alt="Logo"></div>
+            <h2>Contact Us</h2>
+            <form action="php/submit_query.php" method="POST">
+                <div class="form-group">
+                    <label for="contact-name">Name:</label>
+                    <input type="text" id="contact-name" name="name" placeholder="Enter your name" required
+                        pattern="^[A-Za-z\s]+$" title="Name should only contain alphabetic characters and spaces">
+                </div>
+                <div class="form-group">
+                    <label for="contact-email">Email:</label>
+                    <input type="email" id="contact-email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact-reason">Reason:</label>
+                    <textarea id="contact-reason" name="reason" placeholder="Tell us why you're reaching out"
+                        required></textarea>
+                </div>
+                <p style="text-align:center; color:#aaa; font-size:0.9rem; margin-top:0.5rem;">or contact us at <a
+                        href="mailto:palinoia.engg@somaiya.edu"
+                        style="color:var(--antique-gold, #c9a84c); text-decoration:none;">palinoia.engg@somaiya.edu</a>
+                </p>
+                <button type="submit" class="btn-submit">SUBMIT</button>
+            </form>
+        </div>
         <div class="auth-graphic auth-right">
             <img src="assets/right_dancer.png" alt="Aesthetic Graphic">
         </div>
