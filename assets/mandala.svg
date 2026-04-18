@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <g id="petal">
+      <path d="M 100 100 C 130 60, 140 30, 100 5 C 60 30, 70 60, 100 100 Z" fill="none" stroke="#5c1a1a" stroke-width="1.5"/>
+      <path d="M 100 100 C 115 70, 120 40, 100 15 C 80 40, 85 70, 100 100 Z" fill="#C9956B" opacity="0.6"/>
+    </g>
+    <g id="flower">
+      <use href="#petal" />
+      <use href="#petal" transform="rotate(45 100 100)" />
+      <use href="#petal" transform="rotate(90 100 100)" />
+      <use href="#petal" transform="rotate(135 100 100)" />
+      <use href="#petal" transform="rotate(180 100 100)" />
+      <use href="#petal" transform="rotate(225 100 100)" />
+      <use href="#petal" transform="rotate(270 100 100)" />
+      <use href="#petal" transform="rotate(315 100 100)" />
+    </g>
+    <g id="inner-star">
+      <polygon points="100,50 115,85 150,100 115,115 100,150 85,115 50,100 85,85" fill="#5c1a1a" opacity="0.8"/>
+    </g>
+  </defs>
+
+  <!-- Outer Rings -->
+  <circle cx="100" cy="100" r="95" fill="none" stroke="#C9956B" stroke-width="1" />
+  <circle cx="100" cy="100" r="88" fill="none" stroke="#5c1a1a" stroke-width="1.5" stroke-dasharray="4 6"/>
+  <circle cx="100" cy="100" r="80" fill="none" stroke="#C9956B" stroke-width="0.5" />
+  
+  <!-- Outer Flower -->
+  <use href="#flower" />
+  
+  <!-- Middle Rings -->
+  <circle cx="100" cy="100" r="50" fill="none" stroke="#5c1a1a" stroke-width="1" />
+  <circle cx="100" cy="100" r="45" fill="none" stroke="#C9956B" stroke-width="2" stroke-dasharray="2 4"/>
+  
+  <!-- Inner Flower -->
+  <use href="#flower" transform="scale(0.45) translate(122 122)" />
+  
+  <!-- Center elements -->
+  <use href="#inner-star" transform="scale(0.3) translate(233 233)" />
+  <circle cx="100" cy="100" r="5" fill="#C9956B" />
+</svg>

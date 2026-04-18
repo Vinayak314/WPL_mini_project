@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Tasks - Team Palinoia</title>
+    <link rel="stylesheet" href="style/common.css">
+    <link rel="stylesheet" href="style/tasks.css">
+</head>
+
+<body>
+
+    <div style="display:flex; justify-content:flex-end; padding:1rem 2rem;">
+        <a href="index.html" class="nav-action" title="Logout" style="text-decoration:none; background:var(--antique-gold, #c9a84c); color:#1a1a2e; padding:0.5rem 1.5rem; border-radius:6px; font-weight:600; transition:opacity 0.3s;">
+            <span class="nav-action-text">Logout</span>
+        </a>
+    </div>
+
+    <main class="dashboard-main">
+        <h2 class="page-title" id="welcome-name">Welcome back, Member!</h2>
+        <p class="dashboard-subtitle">Here are your assigned tasks for the upcoming events.</p>
+
+        <div class="divider-container">
+            <img src="assets/divider.svg" alt="Decorative Divider" class="dashboard-divider">
+        </div>
+
+        <div class="tasks-section" id="tasks-container">
+            <p style="text-align:center; color:#aaa;">Loading tasks...</p>
+            </div>
+    </main>
+
+    <footer class="footer">
+        &copy; 2026 Team Palinoia. All rights reserved.
+    </footer>
+
+    <script>
+        const statusMap = {
+            'urgent': { label: 'Urgent', class: 'status-urgent' },
+            'in_progress': { label: 'In Progress', class: 'status-pending' },
+            'completed': { label: 'Completed', class: 'status-completed' }
+        };
+
+        function formatDate(dateStr) {
+            const d = new Date(dateStr);
+            return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+        }
+
+        fetch('php/fetch_tasks.php')
+            .then(res => res.json())
+            .then(data => {
+                if (data.error === 'not_logged_in') {
+                    alert('Please login first');
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                // Set welcome name
+                document.getElementById('welcome-name').textContent = 'Welcome back, ' + data.name + '!';
+
+                const container = document.getElementById('tasks-container');
+                container.innerHTML = '';
+
+                if (data.tasks.length === 0) {
+                    container.innerHTML = '<p style="text-align:center; color:#aaa;">No tasks assigned yet.</p>';
+                    return;
+                }
+
+                data.tasks.forEach(task => {
+                    const s = statusMap[task.status] || { label: task.status, class: '' };
+                    const card = `
+                        <div class="task-card">
+                            <div class="task-header">
+                                <div class="task-title-group">
+                                    <img src="assets/task_icon.svg" class="task-icon" alt="Task">
+                                    <h3>${task.title}</h3>
+                                </div>
+                                <span class="task-status ${s.class}">${s.label}</span>
+                            </div>
+                            <div class="task-details">
+                                <p>${task.description}</p>
+                            </div>
+                            <div class="task-meta">
+                                <span><strong>Deadline:</strong> ${formatDate(task.deadline)}</span>
+                                <span><strong>Event:</strong> ${task.event_name}</span>
+                            </div>
+                        </div>`;
+                    container.innerHTML += card;
+                });
+            })
+            .catch(err => {
+                document.getElementById('tasks-container').innerHTML =
+                    '<p style="text-align:center; color:#f66;">Failed to load tasks. Please try again.</p>';
+            });
+    </script>
+</body>
+
+</html>

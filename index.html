@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Palinoia</title>
+    <link rel="stylesheet" href="style/common.css">
+    <link rel="stylesheet" href="style/index.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="active">Home</a>
+        <a href="events.html">Events</a>
+        <div class="logo-wrapper"><img src="assets/logo.jpeg" alt="Logo" class="logo"></div>
+        <a href="team.html">Team</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="login.html" class="nav-action" title="Login">
+            <span class="nav-action-text">Team Login</span>
+        </a>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-slider-wrapper">
+                <div class="hero-slider-bg">
+                    <div class="slide"
+                        style="background-image: linear-gradient(rgba(20, 5, 5, 0.65), rgba(92, 26, 26, 0.8)), url('assets/3.jpeg');">
+                    </div>
+                    <div class="slide"
+                        style="background-image: linear-gradient(rgba(20, 5, 5, 0.65), rgba(92, 26, 26, 0.8)), url('assets/hero.jpeg');">
+                    </div>
+                    <div class="slide"
+                        style="background-image: linear-gradient(rgba(20, 5, 5, 0.65), rgba(92, 26, 26, 0.8)), url('assets/2.JPG'); background-position: center 60%;">
+                    </div>
+                    <div class="slide"
+                        style="background-image: linear-gradient(rgba(20, 5, 5, 0.65), rgba(92, 26, 26, 0.8)), url('assets/1.JPG');">
+                    </div>
+                </div>
+            </div>
+            <div class="hero-text">
+                <h1>Team Palinoia</h1>
+                <p>The official Classical Dance Team of K.J. Somaiya School of Engineering. Striving for perfection
+                    through grace and expression.</p>
+                <div class="hero-buttons">
+                    <a href="team.html" class="btn btn-primary">Meet The Group</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="about-content">
+                <h2>Our Story</h2>
+                <div class="about-text">
+                    <p>KJSsE Palinoia is the official classical dance team of K.J. Somaiya School of Engineering. We
+                        are a collective of passionate artists dedicated to preserving and exploring the profound depths
+                        of Indian classical dance.</p>
+                    <p>Guided by our motto, <strong>"Strive Until Perfection,"</strong> we blend traditional rhythmic
+                        complexities and expressive storytelling with exceptional stagecraft. Representing our college
+                        at prestigious cultural festivals and events, our mission remains to invoke the divine through
+                        movement.</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <h3>15+</h3>
+                        <p>Core Performers</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>50+</h3>
+                        <p>Performances</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="social-section">
+            <div class="social-links">
+                <a href="https://www.youtube.com/@teampalinoia8773" class="btn btn-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                    </svg>
+                    YouTube
+                </a>
+                <a href="https://www.instagram.com/kjsce_palinoia" class="btn btn-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                    Instagram
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        &copy; 2026 Team Palinoia. All rights reserved.
+    </footer>
+
+    <script>
+        const sliderBg = document.querySelector('.hero-slider-bg');
+        const slides = document.querySelectorAll('.slide');
+
+        if (sliderBg && slides.length > 0) {
+            // Clone the first slide to create a seamless infinite loop
+            const firstClone = slides[0].cloneNode(true);
+            sliderBg.appendChild(firstClone);
+
+            let currentSlide = 0;
+            const totalOriginalSlides = slides.length;
+
+            setInterval(() => {
+                currentSlide++;
+                // Ensure transition is active for normal sliding
+                sliderBg.style.transition = 'transform 1s ease-in-out';
+                sliderBg.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+                // If we reached the clone slide, jump back to the real first slide secretly
+                if (currentSlide === totalOriginalSlides) {
+                    setTimeout(() => {
+                        sliderBg.style.transition = 'none';
+                        currentSlide = 0;
+                        sliderBg.style.transform = `translateX(0)`;
+                        // Force a reflow so the browser registers the jump before the next transition
+                        sliderBg.offsetHeight;
+                    }, 1000); // 1000ms matches the CSS transition duration
+                }
+            }, 4000); // changes slide every 4 seconds
+        }
+    </script>
+</body>
+
+</html>
