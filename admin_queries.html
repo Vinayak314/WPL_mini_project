@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Queries - Team Palinoia</title>
+    <title>Admin Dashboard - Team Palinoia</title>
     <link rel="stylesheet" href="style/common.css">
     <link rel="stylesheet" href="style/tasks.css">
+    <link rel="stylesheet" href="style/contact.css">
 </head>
 
 <body>
@@ -19,14 +20,121 @@
 
     <main class="dashboard-main">
         <h2 class="page-title" id="welcome-name">Welcome back, Admin!</h2>
-        <p class="dashboard-subtitle">Here are the submitted queries from the contact form.</p>
+        <p class="dashboard-subtitle">Manage your team, tasks, and queries from one place.</p>
 
         <div class="divider-container">
             <img src="assets/divider.svg" alt="Decorative Divider" class="dashboard-divider">
         </div>
 
-        <div class="tasks-section" id="queries-container">
-            <p style="text-align:center; color:#aaa;">Loading queries...</p>
+        <!-- Tab Navigation -->
+        <div class="admin-tabs" id="admin-tabs">
+            <button class="admin-tab active" data-tab="queries">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Queries
+            </button>
+            <button class="admin-tab" data-tab="all-tasks">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                All Tasks
+            </button>
+            <button class="admin-tab" data-tab="assign-task">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Assign Task
+            </button>
+            <button class="admin-tab" data-tab="members">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                Members
+            </button>
+        </div>
+
+        <!-- TAB 1: Queries -->
+        <div class="tab-content active" id="tab-queries">
+            <div class="tasks-section" id="queries-container">
+                <p style="text-align:center; color:#aaa;">Loading queries...</p>
+            </div>
+        </div>
+
+        <!-- TAB 2: All Tasks -->
+        <div class="tab-content" id="tab-all-tasks">
+            <div class="tasks-section" id="all-tasks-container">
+                <p style="text-align:center; color:#aaa;">Loading tasks...</p>
+            </div>
+        </div>
+
+        <!-- TAB 3: Assign Task -->
+        <div class="tab-content" id="tab-assign-task">
+            <div class="admin-form-wrapper">
+                <div class="admin-form-card">
+                    <h3 class="admin-form-title">Assign a New Task</h3>
+                    <form id="assignTaskForm">
+                        <div class="form-group">
+                            <label for="task-member">Assign To</label>
+                            <select id="task-member" name="member_id" required>
+                                <option value="">— Select Member —</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="task-title">Task Title</label>
+                            <input type="text" id="task-title" name="title" required placeholder="e.g. Choreography Rehearsal">
+                        </div>
+                        <div class="form-group">
+                            <label for="task-description">Description</label>
+                            <textarea id="task-description" name="description" placeholder="Describe the task in detail..."></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="task-status">Status</label>
+                                <select id="task-status" name="status" required>
+                                    <option value="in_progress">In Progress</option>
+                                    <option value="urgent">Urgent</option>
+                                    <option value="completed">Completed</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="task-deadline">Deadline</label>
+                                <input type="date" id="task-deadline" name="deadline" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="task-event">Event Name</label>
+                            <input type="text" id="task-event" name="event_name" placeholder="e.g. Naari, Symphony, Farewell">
+                        </div>
+                        <button type="submit" class="btn-submit" id="btn-assign-task">Assign Task</button>
+                    </form>
+                    <div id="task-form-message" class="form-message"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: Members -->
+        <div class="tab-content" id="tab-members">
+            <!-- Add Member Form -->
+            <div class="admin-form-wrapper">
+                <div class="admin-form-card">
+                    <h3 class="admin-form-title">Add New Member</h3>
+                    <form id="addMemberForm">
+                        <div class="form-group">
+                            <label for="member-name">Full Name</label>
+                            <input type="text" id="member-name" name="name" required placeholder="e.g. Pratha Nagpal" pattern="^[A-Za-z\s]+$" title="Only letters and spaces">
+                        </div>
+                        <div class="form-group">
+                            <label for="member-email">Email Address</label>
+                            <input type="email" id="member-email" name="email" required placeholder="e.g. name@somaiya.edu">
+                        </div>
+                        <div class="form-group">
+                            <label for="member-password">Password</label>
+                            <input type="text" id="member-password" name="password" required placeholder="Set login password" minlength="4">
+                        </div>
+                        <button type="submit" class="btn-submit" id="btn-add-member">Add Member</button>
+                    </form>
+                    <div id="member-form-message" class="form-message"></div>
+                </div>
+            </div>
+
+            <!-- Existing Members List -->
+            <div class="tasks-section" id="members-list-container">
+                <h3 class="members-list-title">Current Team Members</h3>
+                <p style="text-align:center; color:#aaa;">Loading members...</p>
+            </div>
         </div>
     </main>
 
@@ -35,6 +143,39 @@
     </footer>
 
     <script>
+        // ==========================
+        // Tab Switching
+        // ==========================
+        const tabs = document.querySelectorAll('.admin-tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        let membersLoaded = false;
+        let allTasksLoaded = false;
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(tc => tc.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+
+                // Lazy load data when tab is first opened
+                if (tab.dataset.tab === 'members' && !membersLoaded) {
+                    loadMembers();
+                    membersLoaded = true;
+                }
+                if (tab.dataset.tab === 'all-tasks' && !allTasksLoaded) {
+                    loadAllTasks();
+                    allTasksLoaded = true;
+                }
+                if (tab.dataset.tab === 'assign-task') {
+                    loadMemberDropdown();
+                }
+            });
+        });
+
+        // ==========================
+        // Utility Functions
+        // ==========================
         function formatDateTime(dateStr) {
             const d = new Date(dateStr);
             return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })
@@ -42,6 +183,28 @@
                 + d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
         }
 
+        function formatDate(dateStr) {
+            const d = new Date(dateStr);
+            return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+        }
+
+        const statusMap = {
+            'urgent': { label: 'Urgent', class: 'status-urgent' },
+            'in_progress': { label: 'In Progress', class: 'status-pending' },
+            'completed': { label: 'Completed', class: 'status-completed' }
+        };
+
+        function showMessage(elementId, message, isError) {
+            const el = document.getElementById(elementId);
+            el.textContent = message;
+            el.className = 'form-message ' + (isError ? 'form-message-error' : 'form-message-success');
+            el.style.display = 'block';
+            setTimeout(() => { el.style.display = 'none'; }, 4000);
+        }
+
+        // ==========================
+        // TAB 1: Load Queries
+        // ==========================
         fetch('php/fetch_queries.php')
             .then(res => res.json())
             .then(data => {
@@ -56,7 +219,6 @@
                     return;
                 }
 
-                // Set welcome name
                 document.getElementById('welcome-name').textContent = 'Welcome back, ' + data.name + '!';
 
                 const container = document.getElementById('queries-container');
@@ -94,6 +256,207 @@
                 document.getElementById('queries-container').innerHTML =
                     '<p style="text-align:center; color:#f66;">Failed to load queries. Please try again.</p>';
             });
+
+        // ==========================
+        // TAB 2: Load All Tasks
+        // ==========================
+        function loadAllTasks() {
+            const container = document.getElementById('all-tasks-container');
+            container.innerHTML = '<p style="text-align:center; color:#aaa;">Loading tasks...</p>';
+
+            fetch('php/fetch_all_tasks.php')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.error) return;
+
+                    container.innerHTML = '';
+
+                    if (data.tasks.length === 0) {
+                        container.innerHTML = '<p style="text-align:center; color:#aaa;">No tasks assigned yet.</p>';
+                        return;
+                    }
+
+                    data.tasks.forEach(task => {
+                        const s = statusMap[task.status] || { label: task.status, class: '' };
+                        const card = `
+                            <div class="task-card">
+                                <div class="task-header">
+                                    <div class="task-title-group">
+                                        <svg class="task-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--antique-gold);">
+                                            <path d="M9 11l3 3L22 4"/>
+                                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                                        </svg>
+                                        <h3>${task.title}</h3>
+                                    </div>
+                                    <span class="task-status ${s.class}">${s.label}</span>
+                                </div>
+                                <div class="task-details">
+                                    <p>${task.description}</p>
+                                </div>
+                                <div class="task-meta">
+                                    <span><strong>Assigned To:</strong> ${task.member_name}</span>
+                                    <span><strong>Deadline:</strong> ${formatDate(task.deadline)}</span>
+                                    <span><strong>Event:</strong> ${task.event_name || '—'}</span>
+                                </div>
+                            </div>`;
+                        container.innerHTML += card;
+                    });
+                })
+                .catch(() => {
+                    container.innerHTML = '<p style="text-align:center; color:#f66;">Failed to load tasks.</p>';
+                });
+        }
+
+        // ==========================
+        // TAB 3: Assign Task
+        // ==========================
+        function loadMemberDropdown() {
+            const select = document.getElementById('task-member');
+            fetch('php/fetch_members.php')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.error) return;
+                    select.innerHTML = '<option value="">— Select Member —</option>';
+                    data.members.forEach(m => {
+                        select.innerHTML += `<option value="${m.member_id}">${m.name}</option>`;
+                    });
+                });
+        }
+
+        document.getElementById('assignTaskForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const btn = document.getElementById('btn-assign-task');
+            btn.disabled = true;
+            btn.textContent = 'Assigning...';
+
+            const formData = new FormData(this);
+
+            fetch('php/add_task.php', { method: 'POST', body: formData })
+                .then(res => res.json())
+                .then(data => {
+                    btn.disabled = false;
+                    btn.textContent = 'Assign Task';
+
+                    if (data.success) {
+                        showMessage('task-form-message', data.message, false);
+                        this.reset();
+                        allTasksLoaded = false; // force reload on next tab visit
+                    } else {
+                        showMessage('task-form-message', data.message || 'Something went wrong.', true);
+                    }
+                })
+                .catch(() => {
+                    btn.disabled = false;
+                    btn.textContent = 'Assign Task';
+                    showMessage('task-form-message', 'Network error. Please try again.', true);
+                });
+        });
+
+        // ==========================
+        // TAB 4: Members
+        // ==========================
+        function loadMembers() {
+            const container = document.getElementById('members-list-container');
+            container.innerHTML = '<h3 class="members-list-title">Current Team Members</h3><p style="text-align:center; color:#aaa;">Loading members...</p>';
+
+            fetch('php/fetch_members.php')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.error) return;
+
+                    container.innerHTML = '<h3 class="members-list-title">Current Team Members</h3>';
+
+                    if (data.members.length === 0) {
+                        container.innerHTML += '<p style="text-align:center; color:#aaa;">No members added yet.</p>';
+                        return;
+                    }
+
+                    data.members.forEach(member => {
+                        const card = `
+                            <div class="task-card member-card">
+                                <div class="task-header">
+                                    <div class="task-title-group">
+                                        <svg class="task-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--antique-gold);">
+                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                            <circle cx="12" cy="7" r="4"/>
+                                        </svg>
+                                        <h3>${member.name}</h3>
+                                    </div>
+                                    <span class="task-status status-pending" style="text-transform:none;">${member.email}</span>
+                                </div>
+                                <div class="member-actions">
+                                    <button class="btn-remove-member" onclick="removeMember(${member.member_id}, '${member.name}')">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+                                        Remove
+                                    </button>
+                                </div>
+                            </div>`;
+                        container.innerHTML += card;
+                    });
+                })
+                .catch(() => {
+                    container.innerHTML = '<h3 class="members-list-title">Current Team Members</h3><p style="text-align:center; color:#f66;">Failed to load members.</p>';
+                });
+        }
+
+        function removeMember(memberId, memberName) {
+            if (!confirm(`Are you sure you want to remove ${memberName}? This will also delete all their assigned tasks.`)) {
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('member_id', memberId);
+
+            fetch('php/delete_member.php', { method: 'POST', body: formData })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(data.message);
+                        membersLoaded = false;
+                        allTasksLoaded = false;
+                        loadMembers();
+                        membersLoaded = true;
+                    } else {
+                        alert(data.message || 'Failed to remove member.');
+                    }
+                })
+                .catch(() => {
+                    alert('Network error. Please try again.');
+                });
+        }
+
+        // Add Member Form
+        document.getElementById('addMemberForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const btn = document.getElementById('btn-add-member');
+            btn.disabled = true;
+            btn.textContent = 'Adding...';
+
+            const formData = new FormData(this);
+
+            fetch('php/add_member.php', { method: 'POST', body: formData })
+                .then(res => res.json())
+                .then(data => {
+                    btn.disabled = false;
+                    btn.textContent = 'Add Member';
+
+                    if (data.success) {
+                        showMessage('member-form-message', data.message, false);
+                        this.reset();
+                        // Refresh the members list
+                        membersLoaded = false;
+                        loadMembers();
+                        membersLoaded = true;
+                    } else {
+                        showMessage('member-form-message', data.message || 'Something went wrong.', true);
+                    }
+                })
+                .catch(() => {
+                    btn.disabled = false;
+                    btn.textContent = 'Add Member';
+                    showMessage('member-form-message', 'Network error. Please try again.', true);
+                });
+        });
     </script>
 </body>
 

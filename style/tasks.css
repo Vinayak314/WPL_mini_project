@@ -195,3 +195,294 @@
         display: none;
     }
 }
+
+/* ===== Admin Tab Navigation ===== */
+.admin-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 40px;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+}
+
+.admin-tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    border: 2px solid var(--blush);
+    border-radius: 40px;
+    background: #fff;
+    font-family: var(--heading);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--burgundy);
+    cursor: pointer;
+    transition: all 0.35s ease;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(92, 26, 26, 0.04);
+}
+
+.admin-tab svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--burgundy);
+    transition: stroke 0.35s ease;
+    flex-shrink: 0;
+}
+
+.admin-tab:hover {
+    border-color: var(--antique-gold);
+    color: var(--rose);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(201, 149, 107, 0.15);
+}
+
+.admin-tab:hover svg {
+    stroke: var(--rose);
+}
+
+.admin-tab.active {
+    background: var(--antique-gold);
+    border-color: var(--antique-gold);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(201, 149, 107, 0.35);
+}
+
+.admin-tab.active svg {
+    stroke: #fff;
+}
+
+/* ===== Tab Content ===== */
+.tab-content {
+    display: none;
+    animation: fadeInTab 0.4s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeInTab {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== Admin Form Wrapper ===== */
+.admin-form-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 0 40px 40px;
+}
+
+.admin-form-card {
+    background: #fff;
+    border: 2px solid var(--blush);
+    border-radius: 16px;
+    padding: 40px 44px;
+    width: 100%;
+    max-width: 520px;
+    box-shadow: 0 6px 28px rgba(92, 26, 26, 0.07);
+    position: relative;
+    overflow: hidden;
+}
+
+.admin-form-card::after {
+    content: '';
+    position: absolute;
+    bottom: -40px;
+    right: -40px;
+    width: 180px;
+    height: 180px;
+    background: url('../assets/mandala.svg') no-repeat center;
+    background-size: contain;
+    opacity: 0.04;
+    pointer-events: none;
+    transform: rotate(15deg);
+}
+
+.admin-form-title {
+    font-family: var(--heading);
+    color: var(--burgundy);
+    font-size: 22px;
+    font-weight: 400;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.admin-form-title::after {
+    content: '✧';
+    display: block;
+    font-size: 14px;
+    color: var(--antique-gold);
+    margin-top: 8px;
+    letter-spacing: 8px;
+    opacity: 0.7;
+}
+
+/* ===== Form Select & Date Inputs ===== */
+.form-group select,
+.form-group input[type="date"] {
+    width: 100%;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: var(--body);
+    outline: none;
+    transition: border-color 0.3s;
+    color: var(--burgundy);
+    background: #fff;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.form-group select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235C1A1A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    cursor: pointer;
+}
+
+.form-group select:focus,
+.form-group input[type="date"]:focus {
+    border-color: var(--rose);
+}
+
+/* ===== Inline Form Row ===== */
+.form-row {
+    display: flex;
+    gap: 16px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+/* ===== Form Message Feedback ===== */
+.form-message {
+    display: none;
+    text-align: center;
+    padding: 10px 16px;
+    border-radius: 8px;
+    margin-top: 16px;
+    font-family: var(--body);
+    font-size: 14px;
+    font-weight: 500;
+    animation: fadeInTab 0.3s ease;
+}
+
+.form-message-success {
+    background: #eaf7ee;
+    color: #2d6a3f;
+    border: 1px solid #b8e0c5;
+}
+
+.form-message-error {
+    background: #fdeaea;
+    color: #8f0000;
+    border: 1px solid #f5c6c6;
+}
+
+/* ===== Members List ===== */
+.members-list-title {
+    font-family: var(--heading);
+    color: var(--burgundy);
+    font-size: 22px;
+    font-weight: 400;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.members-list-title::after {
+    content: '✧';
+    display: block;
+    font-size: 14px;
+    color: var(--antique-gold);
+    margin-top: 6px;
+    letter-spacing: 8px;
+    opacity: 0.7;
+}
+
+.member-card .task-header {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.member-actions {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 4px;
+}
+
+.btn-remove-member {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 18px;
+    border: 1.5px solid var(--rose);
+    border-radius: 30px;
+    background: transparent;
+    color: var(--rose);
+    font-family: var(--heading);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-remove-member svg {
+    width: 14px;
+    height: 14px;
+    stroke: var(--rose);
+    transition: stroke 0.3s ease;
+}
+
+.btn-remove-member:hover {
+    background: var(--rose);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(143, 0, 0, 0.2);
+    transform: translateY(-1px);
+}
+
+.btn-remove-member:hover svg {
+    stroke: #fff;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+    .admin-tabs {
+        padding: 0 16px;
+    }
+
+    .admin-tab {
+        padding: 10px 18px;
+        font-size: 12px;
+    }
+
+    .admin-form-card {
+        padding: 28px 24px;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .tasks-section {
+        padding: 20px 20px 40px;
+    }
+}
