@@ -46,7 +46,7 @@
             return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
         }
 
-        fetch('php/fetch_tasks.php')
+        fetch('php/tasks.php')
             .then(res => res.json())
             .then(data => {
                 if (data.error === 'not_logged_in') {
